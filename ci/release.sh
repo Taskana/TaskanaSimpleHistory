@@ -28,8 +28,8 @@ set -e # fail fast
 #H       * codesigning.asc.enc
 #H     have to exist in the same folder as this script
 #H   - the environment variables 
-#H       * encrypted_a4551539cb8c_key 
-#H       * encrypted_a4551539cb8c_iv
+#H       * encrypted_c64162e168ca_key
+#H       * encrypted_c64162e168ca_iv
 #H     have to exist (in order to decode codesigning.asc.enc)
 # Arguments:
 #   $1: exit code
@@ -40,13 +40,13 @@ function helpAndExit {
 
 # decripting gpg keys and importing them (needed to sign artifacts)
 # Global:
-#   $encrypted_a4551539cb8c__key: decription key
-#   $encrypted_a4551539cb8c__iv: initialisation vector
+#   $encrypted_c64162e168ca_key: description key
+#   $encrypted_c64162e168ca_iv: initialisation vector
 # Arguments:
 #   $1: basedir
 function decodeAndImportKeys {
   if [[ ! -f "$1/codesigning.asc" ]]; then
-	openssl aes-256-cbc -K "$encrypted_a4551539cb8c_key" -iv "$encrypted_a4551539cb8c_iv" -in "$1/codesigning.asc.enc" -out "$1/codesigning.asc" -d
+	openssl aes-256-cbc -K "$encrypted_c64162e168ca_key" -iv "$encrypted_c64162e168ca_iv" -in "$1/codesigning.asc.enc" -out "$1/codesigning.asc" -d
     gpg --import "$1/codesigning.asc"
   fi
 }
