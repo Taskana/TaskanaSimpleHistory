@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>pro.taskana.history.plugin</groupId>
-	<artifactId>taskana-spring-example</artifactId>
+	<groupId>pro.taskana.simplehistory</groupId>
+	<artifactId>taskana-simplehistory-example</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.4-SNAPSHOT</version>
 	<parent>
@@ -44,8 +44,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>pro.taskana.history.plugin</groupId>
-			<artifactId>taskana-history-plugin</artifactId>
+			<groupId>pro.taskana.simplehistory</groupId>
+			<artifactId>taskana-simplehistory-provider</artifactId>
 			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 
