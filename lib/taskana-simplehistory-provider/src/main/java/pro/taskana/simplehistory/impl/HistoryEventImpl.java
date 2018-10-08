@@ -1,7 +1,8 @@
-package pro.taskana.history.plugin.impl;
+package pro.taskana.simplehistory.impl;
 
 import java.time.Instant;
-import pro.taskana.history.plugin.HistoryEvent;
+
+import pro.taskana.simplehistory.HistoryEvent;
 
 /**
  * This entity contains the most important information about a history event.

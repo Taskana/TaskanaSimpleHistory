@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin.configuration;
+package pro.taskana.simplehistory.configuration;
 
 import java.sql.SQLException;
 
@@ -7,8 +7,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pro.taskana.history.plugin.TaskanaHistoryEngine;
-import pro.taskana.history.plugin.impl.TaskanaHistoryEngineImpl;
+import pro.taskana.simplehistory.TaskanaHistoryEngine;
+import pro.taskana.simplehistory.impl.TaskanaHistoryEngineImpl;
 
 public class TaskanaHistoryEngineConfiguration {
 

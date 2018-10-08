@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin.impl;
+package pro.taskana.simplehistory.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayDeque;
@@ -12,10 +12,10 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 
-import pro.taskana.history.plugin.HistoryService;
-import pro.taskana.history.plugin.TaskanaHistoryEngine;
-import pro.taskana.history.plugin.configuration.TaskanaHistoryEngineConfiguration;
-import pro.taskana.history.plugin.impl.mappings.HistoryEventMapper;
+import pro.taskana.simplehistory.HistoryService;
+import pro.taskana.simplehistory.TaskanaHistoryEngine;
+import pro.taskana.simplehistory.configuration.TaskanaHistoryEngineConfiguration;
+import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
 
 /**
  * This is the implementation of TaskanaHistoryEngine.

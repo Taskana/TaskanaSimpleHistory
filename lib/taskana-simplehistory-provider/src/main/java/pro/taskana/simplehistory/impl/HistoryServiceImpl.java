@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin.impl;
+package pro.taskana.simplehistory.impl;
 
 import java.sql.SQLException;
 import java.time.Instant;
@@ -6,10 +6,10 @@ import java.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pro.taskana.history.plugin.HistoryEvent;
-import pro.taskana.history.plugin.HistoryService;
-import pro.taskana.history.plugin.TaskanaHistoryEngine;
-import pro.taskana.history.plugin.impl.mappings.HistoryEventMapper;
+import pro.taskana.simplehistory.HistoryEvent;
+import pro.taskana.simplehistory.HistoryService;
+import pro.taskana.simplehistory.TaskanaHistoryEngine;
+import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
 
 /**
  * This is the implementation of HistoryService.

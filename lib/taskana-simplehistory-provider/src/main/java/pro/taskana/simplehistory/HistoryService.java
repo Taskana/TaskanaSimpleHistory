@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 /**
  * The History Service manages all operations on history events.
