@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 /**
  * The TaskanaHistoryEngine represents an overall set of all needed services.

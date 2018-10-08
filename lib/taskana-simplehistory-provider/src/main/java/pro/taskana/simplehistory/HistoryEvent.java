@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 import java.time.Instant;
 

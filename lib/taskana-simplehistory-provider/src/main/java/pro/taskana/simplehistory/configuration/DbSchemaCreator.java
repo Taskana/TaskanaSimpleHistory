@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin.configuration;
+package pro.taskana.simplehistory.configuration;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
