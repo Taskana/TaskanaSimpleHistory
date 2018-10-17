@@ -7,7 +7,6 @@
 	<version>0.0.4-SNAPSHOT</version>
 	<modules>
 		<module>taskana-simplehistory-provider</module>
-		<module>taskana-simplehistory-example</module>
 	</modules>
 	<properties>
 		<java.version>1.8</java.version>

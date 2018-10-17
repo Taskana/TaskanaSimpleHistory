@@ -14,7 +14,7 @@ jobs:
   include:
     - stage: Build
       script:
-        - mvn clean install -q -f lib -DskipTests -Dmaven.javadoc.skip=true
+        - mvn clean install -q -f lib -Dmaven.javadoc.skip=true
     - stage: Release
       script:
         - ci/release.sh lib/taskana-simplehistory-provider $TRAVIS_TAG
