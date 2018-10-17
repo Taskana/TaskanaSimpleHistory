@@ -12,7 +12,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 
-import pro.taskana.simplehistory.HistoryService;
+import pro.taskana.history.api.TaskanaHistory;
 import pro.taskana.simplehistory.TaskanaHistoryEngine;
 import pro.taskana.simplehistory.configuration.TaskanaHistoryEngineConfiguration;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
@@ -42,7 +42,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
     }
 
     @Override
-    public HistoryService getTaskanaHistoryService() {
+    public TaskanaHistory getTaskanaHistoryService() {
         return new HistoryServiceImpl(this, sessionManager.getMapper(HistoryEventMapper.class));
     }
 

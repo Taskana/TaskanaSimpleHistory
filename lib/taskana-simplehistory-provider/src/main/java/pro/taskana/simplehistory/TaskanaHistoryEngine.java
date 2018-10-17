@@ -1,13 +1,15 @@
 package pro.taskana.simplehistory;
 
+import pro.taskana.history.api.TaskanaHistory;
+
 /**
  * The TaskanaHistoryEngine represents an overall set of all needed services.
  */
 public interface TaskanaHistoryEngine {
     /**
-     * The HistoryService can be used for operations on all history events.
+     * The TaskanaHistory can be used for operations on all history events.
      *
      * @return the HistoryService
      */
-    HistoryService getTaskanaHistoryService();
+    TaskanaHistory getTaskanaHistoryService();
 }

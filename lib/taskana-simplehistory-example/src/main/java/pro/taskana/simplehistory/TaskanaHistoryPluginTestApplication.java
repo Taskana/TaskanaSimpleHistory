@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

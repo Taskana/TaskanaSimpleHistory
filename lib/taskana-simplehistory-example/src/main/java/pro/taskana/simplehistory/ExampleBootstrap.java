@@ -1,23 +1,30 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import pro.taskana.history.api.TaskanaHistory;
+import pro.taskana.simplehistory.impl.HistoryEventImpl;
+import pro.taskana.simplehistory.impl.HistoryServiceImpl;
+
 @Component
 @Transactional
 public class ExampleBootstrap {
 
     @Autowired
-    private HistoryService historyService;
+    private TaskanaHistory historyService;
 
 
     @PostConstruct
     public void test() {
-        HistoryEvent newEvent = historyService.newHistoryEvent("", "", "");
-        historyService.createHistoryEvent(newEvent);
-        HistoryEvent insertedEvent = historyService.getHistoryEvent(newEvent.getId());
-        System.out.println("---------------------------> event inserted: " + insertedEvent.getId());
+        HistoryEventImpl historyEvent = new HistoryEventImpl();
+        historyEvent.setTaskId("some task Id");
+        historyEvent.setType("Some Type");
+        historyService.create(historyEvent);
+        HistoryServiceImpl historyServiceImpl =  (HistoryServiceImpl)historyService;
+
+        System.out.println("---------------------------> event inserted Id: " + historyServiceImpl.getHistoryEvent(historyEvent.getId()).getId());
     }
 }

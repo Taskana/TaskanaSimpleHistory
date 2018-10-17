@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import pro.taskana.history.api.TaskanaHistory;
+import pro.taskana.history.api.TaskanaHistoryEvent;
 import pro.taskana.simplehistory.impl.HistoryEventImpl;
 
 /**
@@ -15,26 +17,25 @@ import pro.taskana.simplehistory.impl.HistoryEventImpl;
 public interface HistoryEventMapper {
 
     @Insert(
-        "<script>INSERT INTO HISTORY_EVENTS (ID, BUSINESSPROCESSID, TASKID, EVENTTYPE, CREATED, USERID, DOMAIN, WORKBASKETKEY)"
-            + " VALUES (#{historyEvent.id}, #{historyEvent.businessProcessId}, #{historyEvent.taskId}, #{historyEvent.eventType}, #{historyEvent.created}, #{historyEvent.userId}, #{historyEvent.domain}, #{historyEvent.workbasketKey}) "
+        "<script>INSERT INTO HISTORY_EVENTS (ID, TYPE, USER_ID, CREATED, COMMENT, WORKBASKET_KEY, TASK_ID)"
+            + " VALUES (#{historyEvent.id}, #{historyEvent.type}, #{historyEvent.userId}, #{historyEvent.created}, #{historyEvent.comment}, #{historyEvent.workbasketKey}, #{historyEvent.taskId}) "
             + "</script>")
     @Options(keyProperty = "id", keyColumn = "ID")
-    void insert(@Param("historyEvent") HistoryEventImpl historyEvent);
+    void insert(@Param("historyEvent") TaskanaHistoryEvent historyEvent);
 
     @Select(
-        "<script>SELECT ID, BUSINESSPROCESSID, TASKID, EVENTTYPE, CREATED, USERID, DOMAIN, WORKBASKETKEY "
+        "<script>SELECT ID, TYPE, USER_ID, CREATED, COMMENT, WORKBASKET_KEY, TASK_ID "
             + "FROM HISTORY_EVENTS "
             + "WHERE ID = #{id} "
             + "</script>")
     @Results(value = {
         @Result(property = "id", column = "ID"),
-        @Result(property = "businessProcessId", column = "BUSINESSPROCESSID"),
-        @Result(property = "taskId", column = "TASKID"),
-        @Result(property = "eventType", column = "EVENTTYPE"),
+        @Result(property = "type", column = "TYPE"),
+        @Result(property = "userId", column = "USER_ID"),
         @Result(property = "created", column = "CREATED"),
-        @Result(property = "userId", column = "USERID"),
-        @Result(property = "domain", column = "DOMAIN"),
-        @Result(property = "workbasketKey", column = "WORKBASKETKEY")
+        @Result(property = "comment", column = "COMMENT"),
+        @Result(property = "workbasketKey", column = "WORKBASKET_KEY"),
+        @Result(property = "taskId", column = "TASK_ID")
     })
     HistoryEventImpl findById(@Param("id") String id);
 }
