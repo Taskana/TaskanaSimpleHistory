@@ -3,8 +3,10 @@ package pro.taskana.simplehistory.impl;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Deque;
+
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.session.SqlSessionManager;
@@ -12,9 +14,10 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 
-import pro.taskana.simplehistory.HistoryService;
+import pro.taskana.configuration.TaskanaEngineConfiguration;
+import pro.taskana.history.api.TaskanaHistory;
 import pro.taskana.simplehistory.TaskanaHistoryEngine;
-import pro.taskana.simplehistory.configuration.TaskanaHistoryEngineConfiguration;
+import pro.taskana.simplehistory.configuration.DbSchemaCreator;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
 
 /**
@@ -24,26 +27,37 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
 
     private static final String DEFAULT = "default";
 
-    TaskanaHistoryEngineConfiguration taskanaHistoryEngineConfiguration;
+    TaskanaEngineConfiguration taskanaEngineConfiguration;
     protected SqlSessionManager sessionManager;
     protected TransactionFactory transactionFactory;
     protected java.sql.Connection connection = null;
+    protected DbSchemaCreator dbSchemaCreator;
     protected static ThreadLocal<Deque<SqlSessionManager>> sessionStack = new ThreadLocal<>();
+    protected TaskanaHistory taskanaHistoryService;
 
-    public TaskanaHistoryEngineImpl(TaskanaHistoryEngineConfiguration taskanaHistoryEngineConfiguration) {
-        this.taskanaHistoryEngineConfiguration = taskanaHistoryEngineConfiguration;
-        createTransactionFactory(true);
+    public TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
+        this.taskanaEngineConfiguration = taskanaEngineConfiguration;
+
+        createTransactionFactory(this.taskanaEngineConfiguration.getUseManagedTransactions());
         this.sessionManager = createSqlSessionManager();
+        dbSchemaCreator = new DbSchemaCreator(taskanaEngineConfiguration.getDatasource(),
+            taskanaEngineConfiguration.getSchemaName());
+
     }
 
-    public static TaskanaHistoryEngine createTaskanaEngine(
-        TaskanaHistoryEngineConfiguration taskanaHistoryEngineConfiguration) {
-        return new TaskanaHistoryEngineImpl(taskanaHistoryEngineConfiguration);
+    public static TaskanaHistoryEngineImpl createTaskanaEngine(
+        TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
+        return new TaskanaHistoryEngineImpl(taskanaEngineConfiguration);
     }
 
     @Override
-    public HistoryService getTaskanaHistoryService() {
-        return new HistoryServiceImpl(this, sessionManager.getMapper(HistoryEventMapper.class));
+    public TaskanaHistory getTaskanaHistoryService() {
+        if (taskanaHistoryService == null) {
+            SimpleHistoryServiceImpl historyService = new SimpleHistoryServiceImpl();
+            historyService.initialize(taskanaEngineConfiguration);
+            this.taskanaHistoryService = historyService;
+        }
+        return this.taskanaHistoryService;
     }
 
     /**
@@ -52,7 +66,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
      */
     void openConnection() throws SQLException {
         initSqlSession();
-        this.sessionManager.getConnection().setSchema(taskanaHistoryEngineConfiguration.getSchemaName());
+        this.sessionManager.getConnection().setSchema(taskanaEngineConfiguration.getSchemaName());
     }
 
     /**
@@ -80,6 +94,15 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
     }
 
     /**
+     * retrieve the SqlSession used by taskana.
+     *
+     * @return the myBatis SqlSession object used by taskana
+     */
+    SqlSession getSqlSession() {
+        return this.sessionManager;
+    }
+
+    /**
      * creates the MyBatis transaction factory.
      *
      * @param useManagedTransactions
@@ -94,7 +117,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
 
     protected SqlSessionManager createSqlSessionManager() {
         Environment environment = new Environment(DEFAULT, this.transactionFactory,
-            taskanaHistoryEngineConfiguration.getDataSource());
+            taskanaEngineConfiguration.getDatasource());
         Configuration configuration = new Configuration(environment);
 
         // add mappers
