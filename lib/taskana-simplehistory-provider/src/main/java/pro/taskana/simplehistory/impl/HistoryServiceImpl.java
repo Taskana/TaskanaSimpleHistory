@@ -6,16 +6,17 @@ import java.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pro.taskana.simplehistory.HistoryEvent;
-import pro.taskana.simplehistory.HistoryService;
+import pro.taskana.history.api.TaskanaHistory;
+import pro.taskana.history.api.TaskanaHistoryEvent;
+import pro.taskana.impl.util.IdGenerator;
 import pro.taskana.simplehistory.TaskanaHistoryEngine;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
 
 /**
  * This is the implementation of HistoryService.
  */
-public class HistoryServiceImpl implements HistoryService {
-
+public class HistoryServiceImpl implements TaskanaHistory {
+    private static final String ID_PREFIX_HISTORY_EVENT = "HEI";
     private static final Logger LOGGER = LoggerFactory.getLogger(HistoryServiceImpl.class);
     private TaskanaHistoryEngineImpl taskanaHistoryEngine;
     private HistoryEventMapper historyEventMapper;
@@ -25,35 +26,9 @@ public class HistoryServiceImpl implements HistoryService {
         this.historyEventMapper = historyEventMapper;
     }
 
-    @Override
-    public HistoryEvent newHistoryEvent(String eventType, String taskId, String workbasketKey) {
-        HistoryEventImpl historyEvent = new HistoryEventImpl();
-        historyEvent.setEventType(eventType);
-        historyEvent.setTaskId(taskId);
-        historyEvent.setWorkbasketKey(workbasketKey);
-        return historyEvent;
-    }
 
-    @Override
-    public HistoryEvent createHistoryEvent(HistoryEvent newHistoryEvent) {
-        HistoryEventImpl historyEvent = (HistoryEventImpl) newHistoryEvent;
-        try {
-            taskanaHistoryEngine.openConnection();
-            historyEvent.setId("some auto generated ID");
-            Instant now = Instant.now();
-            historyEvent.setCreated(now);
-            historyEventMapper.insert(historyEvent);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            taskanaHistoryEngine.returnConnection();
-        }
-        return historyEvent;
-    }
-
-    @Override
-    public HistoryEvent getHistoryEvent(String id) {
-        HistoryEvent historyEvent = null;
+    public HistoryEventImpl getHistoryEvent(String id) {
+        HistoryEventImpl historyEvent = null;
 
         try {
             taskanaHistoryEngine.openConnection();
@@ -65,5 +40,20 @@ public class HistoryServiceImpl implements HistoryService {
         }
         return historyEvent;
 
+    }
+
+    @Override
+    public void create(TaskanaHistoryEvent event) {
+        try {
+            taskanaHistoryEngine.openConnection();
+            event.setId(IdGenerator.generateWithPrefix(ID_PREFIX_HISTORY_EVENT));
+            Instant now = Instant.now();
+            event.setCreated(now);
+            historyEventMapper.insert(event);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            taskanaHistoryEngine.returnConnection();
+        }
     }
 }

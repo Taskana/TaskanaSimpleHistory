@@ -1,4 +1,4 @@
-package pro.taskana.history.plugin;
+package pro.taskana.simplehistory;
 
 import java.sql.SQLException;
 
@@ -10,8 +10,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
-import pro.taskana.history.plugin.configuration.TaskanaHistoryEngineConfiguration;
-import pro.taskana.history.plugin.impl.TaskanaHistoryEngineImpl;
+import pro.taskana.history.api.TaskanaHistory;
+import pro.taskana.simplehistory.configuration.TaskanaHistoryEngineConfiguration;
+import pro.taskana.simplehistory.impl.TaskanaHistoryEngineImpl;
 
 public class TaskanaHistoryPluginConfiguration {
 
@@ -47,7 +48,7 @@ public class TaskanaHistoryPluginConfiguration {
     }
 
     @Bean
-    public HistoryService historyService(TaskanaHistoryEngine taskanaHistoryEngine) {
+    public TaskanaHistory historyService(TaskanaHistoryEngine taskanaHistoryEngine) {
         return taskanaHistoryEngine.getTaskanaHistoryService();
     }
 
