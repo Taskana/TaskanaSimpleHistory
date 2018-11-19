@@ -10,6 +10,8 @@ import pro.taskana.configuration.TaskanaEngineConfiguration;
 import pro.taskana.history.api.TaskanaHistory;
 import pro.taskana.history.api.TaskanaHistoryEvent;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
+import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
+import pro.taskana.simplehistory.query.HistoryQuery;
 
 /**
  * This is the implementation of TaskanaHistory.
@@ -19,6 +21,7 @@ public class SimpleHistoryServiceImpl implements TaskanaHistory {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHistoryServiceImpl.class);
     private TaskanaHistoryEngineImpl taskanaHistoryEngine;
     private HistoryEventMapper historyEventMapper;
+    private HistoryQueryMapper historyQueryMapper;
 
     @Override
     public void initialize(TaskanaEngineConfiguration taskanaEngineConfiguration) {
@@ -33,6 +36,7 @@ public class SimpleHistoryServiceImpl implements TaskanaHistory {
             e.printStackTrace();
         }
         this.historyEventMapper = this.taskanaHistoryEngine.getSqlSession().getMapper(HistoryEventMapper.class);
+        this.historyQueryMapper = this.taskanaHistoryEngine.getSqlSession().getMapper(HistoryQueryMapper.class);
 
     }
 
@@ -51,5 +55,9 @@ public class SimpleHistoryServiceImpl implements TaskanaHistory {
             taskanaHistoryEngine.returnConnection();
             LOGGER.debug("exit from create(TaskanaHistoryEvent event). Returning object = {}.", event);
         }
+    }
+
+    public HistoryQuery createHistoryQuery() {
+    	return new HistoryQueryImpl(taskanaHistoryEngine, historyQueryMapper);
     }
 }
