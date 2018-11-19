@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 public class DbSchemaCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DbSchemaCreator.class);
-    private static final String SQL = "/sql";
     private static final String DB_SCHEMA = "/sql/taskana-history-schema.sql";
     private DataSource dataSource;
     private String schemaName;
@@ -39,6 +38,7 @@ public class DbSchemaCreator {
      */
     public void run() throws SQLException {
         Connection connection = dataSource.getConnection();
+        connection.setSchema(schemaName);
         ScriptRunner runner = new ScriptRunner(connection);
         runner.setStopOnError(true);
         runner.setLogWriter(logWriter);

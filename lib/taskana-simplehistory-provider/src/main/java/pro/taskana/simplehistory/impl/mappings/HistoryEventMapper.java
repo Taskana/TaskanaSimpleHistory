@@ -1,15 +1,9 @@
 package pro.taskana.simplehistory.impl.mappings;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
 
-import pro.taskana.history.api.TaskanaHistory;
 import pro.taskana.history.api.TaskanaHistoryEvent;
-import pro.taskana.simplehistory.impl.HistoryEventImpl;
 
 /**
  * This class is the mybatis mapping of workbaskets.
@@ -30,4 +24,5 @@ public interface HistoryEventMapper {
             + " #{historyEvent.oldData}, #{historyEvent.newData}) "
             + "</script>")
     void insert(@Param("historyEvent") TaskanaHistoryEvent historyEvent);
+
 }

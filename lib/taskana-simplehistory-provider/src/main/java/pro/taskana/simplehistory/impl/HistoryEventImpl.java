@@ -12,7 +12,7 @@ public class HistoryEventImpl extends TaskanaHistoryEvent {
     private String businessProcessId;
     private String parentBusinessProcessId;
     private String taskId;
-    private String type;
+    private String eventType;
     private Instant created;
     private String userId;
     private String domain;
@@ -64,12 +64,12 @@ public class HistoryEventImpl extends TaskanaHistoryEvent {
 
     @Override
     public String getType() {
-        return type;
+        return eventType;
     }
 
     @Override
     public void setType(String type) {
-        this.type = type;
+        this.eventType = type;
     }
 
     @Override

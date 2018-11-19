@@ -19,6 +19,7 @@ import pro.taskana.history.api.TaskanaHistory;
 import pro.taskana.simplehistory.TaskanaHistoryEngine;
 import pro.taskana.simplehistory.configuration.DbSchemaCreator;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
+import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
 
 /**
  * This is the implementation of TaskanaHistoryEngine.
@@ -122,6 +123,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
 
         // add mappers
         configuration.addMapper(HistoryEventMapper.class);
+        configuration.addMapper(HistoryQueryMapper.class);
         SqlSessionFactory localSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
         return SqlSessionManager.newInstance(localSessionFactory);
     }
