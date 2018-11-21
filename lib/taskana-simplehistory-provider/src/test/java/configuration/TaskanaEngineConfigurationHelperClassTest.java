@@ -72,10 +72,6 @@ public class TaskanaEngineConfigurationHelperClassTest {
      * @return
      */
     private static DataSource createDefaultDataSource() {
-        // JdbcDataSource ds = new JdbcDataSource();
-        // ds.setURL("jdbc:h2:mem:taskana;IGNORECASE=TRUE;LOCK_MODE=0");
-        // ds.setPassword("sa");
-        // ds.setUser("sa");
 
         String jdbcDriver = "org.h2.Driver";
         String jdbcUrl = "jdbc:h2:mem:taskana;IGNORECASE=TRUE;LOCK_MODE=0";
