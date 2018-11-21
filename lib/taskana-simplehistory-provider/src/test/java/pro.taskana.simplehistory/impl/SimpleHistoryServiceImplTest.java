@@ -70,7 +70,7 @@ public class SimpleHistoryServiceImplTest {
 
     @Test
     public void testCreateEvent() throws SQLException {
-        HistoryEventImpl expectedWb = createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment");
+        HistoryEventImpl expectedWb = createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment", "wbKey2");
         doNothing().when(historyEventMapperMock).insert(expectedWb);
 
         cutSpy.create(expectedWb);
@@ -81,12 +81,13 @@ public class SimpleHistoryServiceImplTest {
 
     }
 
-    HistoryEventImpl createHistoryEvent(String workbasketKey, String taskId, String type, String comment) {
+    HistoryEventImpl createHistoryEvent(String workbasketKey, String taskId, String type, String comment, String  previousWorkbasketId) {
         HistoryEventImpl historyEvent = new HistoryEventImpl();
         historyEvent.setWorkbasketKey(workbasketKey);
         historyEvent.setTaskId(taskId);
         historyEvent.setType(type);
         historyEvent.setComment(comment);
+        historyEvent.setOldValue(previousWorkbasketId);
         return historyEvent;
     }
 
