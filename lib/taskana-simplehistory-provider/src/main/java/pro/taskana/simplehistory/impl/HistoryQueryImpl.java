@@ -25,6 +25,7 @@ public class HistoryQueryImpl implements HistoryQuery {
     private List<String> orderColumns;
     private int max_rows;  // limit for rows. used to make list(offset, limit) and single() more efficient.
 
+    private String[] idIn;
     private String[] businessProcessIdIn;
     private String[] parentBusinessProcessIdIn;
     private String[] taskIdIn;
@@ -82,6 +83,12 @@ public class HistoryQueryImpl implements HistoryQuery {
         this.orderBy = new ArrayList<>();
         this.orderColumns = new ArrayList<>();
         this.max_rows = -1;
+    }
+
+    @Override
+    public HistoryQuery idIn(String... idIn) {
+        this.idIn = toUpperCopy(idIn);
+        return this;
     }
 
     @Override

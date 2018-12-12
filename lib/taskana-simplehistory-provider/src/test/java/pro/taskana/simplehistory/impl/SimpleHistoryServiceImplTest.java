@@ -110,7 +110,7 @@ public class SimpleHistoryServiceImplTest {
         HistoryEventImpl historyEvent = new HistoryEventImpl();
         historyEvent.setWorkbasketKey(workbasketKey);
         historyEvent.setTaskId(taskId);
-        historyEvent.setType(type);
+        historyEvent.setEventType(type);
         historyEvent.setComment(comment);
         historyEvent.setOldValue(previousWorkbasketId);
         return historyEvent;

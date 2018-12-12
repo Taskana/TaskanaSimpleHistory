@@ -8,6 +8,7 @@ import pro.taskana.QueryColumnName;
  * @author bv
  */
 public enum HistoryQueryColumnName implements QueryColumnName {
+    ID("id"),
     BUSINESS_PROCESS_ID("business_process_id"),
     PARENT_BUSINESS_PROCESS_ID("parent_business_process_id"),
     TASK_ID("task_id"),

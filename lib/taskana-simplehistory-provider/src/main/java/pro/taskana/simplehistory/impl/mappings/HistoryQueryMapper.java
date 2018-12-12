@@ -16,12 +16,13 @@ public interface HistoryQueryMapper {
 
     @Select(
         "<script>"
-            + "SELECT BUSINESS_PROCESS_ID, PARENT_BUSINESS_PROCESS_ID, TASK_ID, EVENT_TYPE, CREATED, USER_ID, DOMAIN, WORKBASKET_KEY, "
+            + "SELECT ID, BUSINESS_PROCESS_ID, PARENT_BUSINESS_PROCESS_ID, TASK_ID, EVENT_TYPE, CREATED, USER_ID, DOMAIN, WORKBASKET_KEY, "
             + "POR_COMPANY, POR_SYSTEM, POR_INSTANCE, POR_TYPE, POR_VALUE, TASK_CLASSIFICATION_KEY, TASK_CLASSIFICATION_CATEGORY,"
             + "ATTACHMENT_CLASSIFICATION_KEY, COMMENT, OLD_VALUE, NEW_VALUE, CUSTOM_1, CUSTOM_2, CUSTOM_3, CUSTOM_4, OLD_DATA, NEW_DATA "
             + "FROM HISTORY_EVENTS"
             + "<where>"
             // IN-Queries
+            + "<if test='idIn != null'>AND UPPER(ID) IN (<foreach item='item' collection='idIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='businessProcessIdIn != null'>AND UPPER(BUSINESS_PROCESS_ID) IN (<foreach item='item' collection='businessProcessIdIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='parentBusinessProcessIdIn != null'>AND UPPER(PARENT_BUSINESS_PROCESS_ID) IN (<foreach item='item' collection='parentBusinessProcessIdIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='taskIdIn != null'>AND UPPER(TASK_ID) IN (<foreach item='item' collection='taskIdIn' separator=',' >#{item}</foreach>)</if> "
@@ -77,6 +78,7 @@ public interface HistoryQueryMapper {
             + "<if test='max_rows > 0'> FETCH FIRST #{max_rows} ROWS ONLY </if>"
             + "</script>")
     @Results(value = {
+            @Result(property = "id", column = "ID"),
             @Result(property = "businessProcessId", column = "BUSINESS_PROCESS_ID"),
             @Result(property = "parentBusinessProcessId", column = "PARENT_BUSINESS_PROCESS_ID"),
             @Result(property = "taskId", column = "TASK_ID"),
@@ -169,6 +171,7 @@ public interface HistoryQueryMapper {
             + "FROM HISTORY_EVENTS"
             + "<where>"
             // IN-Queries
+            + "<if test='idIn != null'>AND UPPER(ID) IN (<foreach item='item' collection='idIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='businessProcessIdIn != null'>AND UPPER(BUSINESS_PROCESS_ID) IN (<foreach item='item' collection='businessProcessIdIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='parentBusinessProcessIdIn != null'>AND UPPER(PARENT_BUSINESS_PROCESS_ID) IN (<foreach item='item' collection='parentBusinessProcessIdIn' separator=',' >#{item}</foreach>)</if> "
             + "<if test='taskIdIn != null'>AND UPPER(TASK_ID) IN (<foreach item='item' collection='taskIdIn' separator=',' >#{item}</foreach>)</if> "

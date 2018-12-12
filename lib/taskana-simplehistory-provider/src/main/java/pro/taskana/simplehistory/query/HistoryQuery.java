@@ -11,6 +11,15 @@ import pro.taskana.simplehistory.impl.HistoryEventImpl;
 public interface HistoryQuery extends BaseQuery<HistoryEventImpl, HistoryQueryColumnName> {
 
     /**
+     * Add your Id to your query.
+     *
+     * @param idIn
+     *            as String
+     * @return the query
+     */
+    HistoryQuery idIn(String... idIn);
+
+    /**
      * Add your businessProcessId to your query.
      *
      * @param businessProcessId

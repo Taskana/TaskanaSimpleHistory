@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import pro.taskana.TimeInterval;
 import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
@@ -24,7 +24,7 @@ import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
  *
  * @author BV
  */
-@RunWith(PowerMockRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class HistoryQueryImplTest {
 
     private HistoryQueryImpl historyQueryImpl;
@@ -67,7 +67,7 @@ public class HistoryQueryImplTest {
     	HistoryEventImpl he = new HistoryEventImpl();
     	he.setTaskId(taskId);
     	he.setWorkbasketKey(workbasketKey);
-    	he.setType(type);
+    	he.setEventType(type);
     	he.setUserId(userId);
     	he.setComment(comment);
     	he.setCreated(created);
