@@ -11,6 +11,11 @@
 	<description>The taskana history events plugin to include in your project.</description>
 	<url>http://taskana.pro</url>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
 	<licenses>
 		<license>
 			<name>The Apache License, Version 2.0</name>
@@ -181,7 +186,7 @@
 		<dependency>
 			<groupId>pro.taskana</groupId>
 			<artifactId>taskana-core</artifactId>
-			<version>1.0.5-SNAPSHOT</version>
+			<version>1.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
