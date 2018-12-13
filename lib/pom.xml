@@ -4,7 +4,7 @@
 	<groupId>pro.taskana.simplehistory</groupId>
 	<artifactId>taskana-simplehistory-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<modules>
 		<module>taskana-simplehistory-provider</module>
 	</modules>
