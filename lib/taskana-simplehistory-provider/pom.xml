@@ -187,6 +187,7 @@
 			<groupId>pro.taskana</groupId>
 			<artifactId>taskana-core</artifactId>
 			<version>1.0.5</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
