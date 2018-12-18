@@ -24,6 +24,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import acceptance.AbstractAccTest;
 import pro.taskana.configuration.TaskanaEngineConfiguration;
 import pro.taskana.simplehistory.impl.mappings.HistoryEventMapper;
 import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
@@ -80,8 +82,23 @@ public class SimpleHistoryServiceImplTest {
     }
 
     @Test
+    public void testInitializeSimpleHistoryServiceWithNonDefaultSchemaName() throws SQLException {
+
+        doReturn(historyEventMapperMock).when(sqlSessionManagerMock).getMapper(HistoryEventMapper.class);
+        doReturn(historyQueryMapperMock).when(sqlSessionManagerMock).getMapper(HistoryQueryMapper.class);
+        doReturn(sqlSessionManagerMock).when(taskanaHistoryEngineMock).getSqlSession();
+        PowerMockito.mockStatic(TaskanaHistoryEngineImpl.class);
+        Mockito.when(TaskanaHistoryEngineImpl.createTaskanaEngine(taskanaEngineConfiguration)).thenReturn(taskanaHistoryEngineMock);
+        cutSpy.initialize(taskanaEngineConfiguration);
+
+        verify(sqlSessionManagerMock, times(2)).getMapper(any());
+        verify(taskanaHistoryEngineMock, times(2)).getSqlSession();
+        PowerMockito.verifyStatic();
+    }
+
+    @Test
     public void testCreateEvent() throws SQLException {
-        HistoryEventImpl expectedWb = createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment", "wbKey2");
+        HistoryEventImpl expectedWb = AbstractAccTest.createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment", "wbKey2");
         doNothing().when(historyEventMapperMock).insert(expectedWb);
 
         cutSpy.create(expectedWb);
@@ -94,7 +111,7 @@ public class SimpleHistoryServiceImplTest {
     @Test
     public void testQueryEvent() throws SQLException {
         List<HistoryEventImpl> returnList = new ArrayList<>();
-        returnList.add(createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment", "wbKey2"));
+        returnList.add(AbstractAccTest.createHistoryEvent("wbKey1", "taskId1", "type1", "Some comment", "wbKey2"));
         doReturn(returnList).when(historyQueryMapperMock).queryHistoryEvent(any());
 
         List<HistoryEventImpl> result = cutSpy.createHistoryQuery().taskIdIn("taskId1").list();
@@ -105,15 +122,4 @@ public class SimpleHistoryServiceImplTest {
         assertEquals(returnList.size(), result.size());
         assertEquals(returnList.get(0).getWorkbasketKey(), result.get(0).getWorkbasketKey());
     }
-
-    HistoryEventImpl createHistoryEvent(String workbasketKey, String taskId, String type, String comment, String  previousWorkbasketId) {
-        HistoryEventImpl historyEvent = new HistoryEventImpl();
-        historyEvent.setWorkbasketKey(workbasketKey);
-        historyEvent.setTaskId(taskId);
-        historyEvent.setEventType(type);
-        historyEvent.setComment(comment);
-        historyEvent.setOldValue(previousWorkbasketId);
-        return historyEvent;
-    }
-
 }

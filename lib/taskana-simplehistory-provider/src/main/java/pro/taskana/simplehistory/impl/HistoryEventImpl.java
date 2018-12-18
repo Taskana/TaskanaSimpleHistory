@@ -9,8 +9,6 @@ import pro.taskana.history.api.TaskanaHistoryEvent;
  */
 public class HistoryEventImpl extends TaskanaHistoryEvent {
 
-
-
     public HistoryEventImpl() {
         super();
     }

@@ -20,11 +20,8 @@ import pro.taskana.simplehistory.query.HistoryQueryColumnName;
 
 public class QueryHistoryAccTest extends AbstractAccTest {
 
-    private SimpleHistoryServiceImpl historyService;
-
     public QueryHistoryAccTest() {
         super();
-        this.historyService = (SimpleHistoryServiceImpl) taskanaHistoryEngine.getTaskanaHistoryService();
     }
 
     @Test
@@ -106,11 +103,8 @@ public class QueryHistoryAccTest extends AbstractAccTest {
     @Test
     public void testQueryAttributesIn() {
         List<HistoryEventImpl> returnValues = historyService.createHistoryQuery()
-            .idIn("1", "2")
+            .businessProcessIdIn("BPI:01", "BPI:02")
             .list();
-        assertEquals(2, returnValues.size());
-
-        returnValues = historyService.createHistoryQuery().businessProcessIdIn("BPI:01", "BPI:02").list();
         assertEquals(2, returnValues.size());
 
         returnValues = historyService.createHistoryQuery().parentBusinessProcessIdIn("BPI:01").list();
