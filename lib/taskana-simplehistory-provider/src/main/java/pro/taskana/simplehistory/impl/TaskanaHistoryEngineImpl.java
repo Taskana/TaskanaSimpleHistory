@@ -36,7 +36,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
     protected static ThreadLocal<Deque<SqlSessionManager>> sessionStack = new ThreadLocal<>();
     protected TaskanaHistory taskanaHistoryService;
 
-    public TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
+    private TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
         this.taskanaEngineConfiguration = taskanaEngineConfiguration;
 
         createTransactionFactory(this.taskanaEngineConfiguration.getUseManagedTransactions());
