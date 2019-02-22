@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pro.taskana.simplehistory</groupId>
 	<artifactId>taskana-simplehistory-provider</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.0.8-SNAPSHOT</version>
 
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>The taskana history events plugin to include in your project.</description>
@@ -14,7 +14,7 @@
 	<parent>
 		<artifactId>taskana-simplehistory-parent</artifactId>
 		<groupId>pro.taskana.simplehistory</groupId>
-		<version>0.0.7-SNAPSHOT</version>
+		<version>0.0.8-SNAPSHOT</version>
 	</parent>
 
 	<licenses>

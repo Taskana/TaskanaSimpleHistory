@@ -5,7 +5,7 @@
 	<artifactId>taskana-simplehistory-parent</artifactId>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<packaging>pom</packaging>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<modules>
 		<module>taskana-simplehistory-provider</module>
 		<module>taskana-simplehistory-rest-spring</module>
