@@ -1,15 +1,16 @@
 language: java
 jdk:
-  - oraclejdk8
+    - oraclejdk8
 
+cache:
+  directories:
+    - $HOME/.m2
 stages:
-  - Build
-  - Release
-
+    - Build
+    - Release
 env:
-  global:
+    global:
     - DEPLOY_REPO=Taskana/TaskanaSimpleHistory
-  
 jobs:
   include:
     - stage: Build
