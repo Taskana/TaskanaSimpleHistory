@@ -22,4 +22,30 @@
 		<spring.version>5.0.5.RELEASE</spring.version>
 		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>pro.taskana.simplehistory</groupId>
+				<artifactId>taskana-simplehistory-provider</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pro.taskana</groupId>
+				<artifactId>taskana-core</artifactId>
+				<version>${taskana.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pro.taskana</groupId>
+				<artifactId>taskana-spring</artifactId>
+				<scope>provided</scope>
+				<version>${taskana.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>pro.taskana</groupId>
+				<artifactId>taskana-rest-spring</artifactId>
+				<version>${taskana.version}</version>
+				<scope>compile</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
