@@ -6,13 +6,17 @@ set -e # fail fast
 #H
 #H prints this help and exits
 #H 
-#H release.sh <module> [version]
+#H release.sh <module> <parentModule> [version]
 #H
 #H   an easy deployment tool to deploy maven projects.
 #H
 #H module:
 #H
 #H   path to maven project
+#H
+#H parentModule:
+#H
+#H   path to parent maven project
 #H
 #H version:
 #H
@@ -70,7 +74,7 @@ function change_version {
 
 function main {
   [[ $# -eq 0 || "$1" == '-h' || "$1" == '--help' ]] && helpAndExit 0
-  [[ "$2" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] && change_version "$1" "${2##v}"
+  [[ "$3" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] && change_version "$2" "${3##v}"
   decodeAndImportKeys `dirname "$0"`
   release "$1" `[[ "$2" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] && echo "release" || echo "snapshot"` "`dirname "$0"`/mvnsettings.xml"
 }
