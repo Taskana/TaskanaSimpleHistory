@@ -6,16 +6,17 @@
 	<groupId>pro.taskana.simplehistory</groupId>
 	<artifactId>taskana-simplehistory-provider</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
-
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>The taskana history events plugin to include in your project.</description>
 	<url>http://taskana.pro</url>
 
-	<parent>
-		<artifactId>taskana-simplehistory-parent</artifactId>
-		<groupId>pro.taskana.simplehistory</groupId>
-		<version>0.0.8-SNAPSHOT</version>
-	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 	<licenses>
 		<license>
