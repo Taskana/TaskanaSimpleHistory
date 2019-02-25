@@ -3,20 +3,17 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>pro.taskana.simplehistory</groupId>
 	<artifactId>taskana-simplehistory-provider</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
 
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>The taskana history events plugin to include in your project.</description>
 	<url>http://taskana.pro</url>
 
 	<parent>
-		<artifactId>taskana-simplehistory-parent</artifactId>
 		<groupId>pro.taskana.simplehistory</groupId>
+		<artifactId>taskana-simplehistory-parent</artifactId>
 		<version>0.0.8-SNAPSHOT</version>
 	</parent>
-
 	<licenses>
 		<license>
 			<name>The Apache License, Version 2.0</name>
@@ -220,5 +217,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 </project>
