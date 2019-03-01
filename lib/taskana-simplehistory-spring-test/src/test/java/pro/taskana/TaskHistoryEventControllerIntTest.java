@@ -1,4 +1,4 @@
-package pro.taskana.rest.simplehistory;
+package pro.taskana;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -41,15 +41,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pro.taskana.exceptions.SystemException;
 import pro.taskana.rest.resource.TaskHistoryEventResource;
+import pro.taskana.rest.simplehistory.TaskHistoryRestConfiguration;
 import pro.taskana.rest.simplehistory.sampledata.SampleDataGenerator;
-import rest.pro.taskana.rest.simplehistory.WebMvcConfig;
 
 /**
  * Controller for integration test.
  */
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TaskHistoryRestConfiguration.class, WebMvcConfig.class},
+@SpringBootTest(classes = {TaskHistoryRestConfiguration.class},
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskHistoryEventControllerIntTest {
     @Value("${taskana.schemaName:TASKANA}")
