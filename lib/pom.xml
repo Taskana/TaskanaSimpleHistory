@@ -11,6 +11,7 @@
 	<modules>
 		<module>taskana-simplehistory-provider</module>
 		<module>taskana-simplehistory-rest-spring</module>
+		<module>taskana-simplehistory-spring-test</module>
 		<module>taskana-simplehistory-rest-spring-example</module>
 	</modules>
 	<properties>
@@ -35,19 +36,26 @@
 				<groupId>pro.taskana</groupId>
 				<artifactId>taskana-core</artifactId>
 				<version>${taskana.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>pro.taskana</groupId>
 				<artifactId>taskana-spring</artifactId>
 				<version>${taskana.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>pro.taskana</groupId>
 				<artifactId>taskana-rest-spring</artifactId>
 				<version>${taskana.version}</version>
-				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>1.4.197</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
