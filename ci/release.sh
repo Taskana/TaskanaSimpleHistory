@@ -61,7 +61,7 @@ function decodeAndImportKeys {
 #   $2: profile name
 #   $3: settings file (dir)
 function release {
-  mvn deploy -f "$1" -P "$2" --settings "$3" -DskipTests=true -B -U
+  mvn deploy -f "$1" -P "$2" --settings "$3" -DskipTests=true -B -U --non-recursive
 }
 
 # changing version in pom and all its children
