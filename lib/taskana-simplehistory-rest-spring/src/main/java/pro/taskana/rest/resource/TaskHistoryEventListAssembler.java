@@ -13,7 +13,7 @@ import pro.taskana.simplehistory.impl.HistoryEventImpl;
 /**
  * Mapper to convert from a list of HistoryEventImpl to a TaskHistoryEventResource.
  */
-public class TaskHistoryEventListAssembler extends  AbstractRessourcesAssembler{
+public class TaskHistoryEventListAssembler extends AbstractRessourcesAssembler {
 
     public TaskHistoryEventListAssembler() {
     }

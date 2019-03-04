@@ -13,6 +13,9 @@ import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
 import pro.taskana.simplehistory.query.HistoryQuery;
 import pro.taskana.simplehistory.query.HistoryQueryColumnName;
 
+/**
+ * Implementation for generating dynamic sql.
+ */
 public class HistoryQueryImpl implements HistoryQuery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HistoryQueryImpl.class);
@@ -23,7 +26,7 @@ public class HistoryQueryImpl implements HistoryQuery {
     private HistoryQueryColumnName columnName;
     private List<String> orderBy;
     private List<String> orderColumns;
-    private int max_rows;  // limit for rows. used to make list(offset, limit) and single() more efficient.
+    private int maxRows;  // limit for rows. used to make list(offset, limit) and single() more efficient.
 
     private String[] idIn;
     private String[] businessProcessIdIn;
@@ -51,7 +54,7 @@ public class HistoryQueryImpl implements HistoryQuery {
     private String[] custom4In;
     private String[] oldDataIn;
     private String[] newDataIn;
-    
+
     private String[] businessProcessIdLike;
     private String[] parentBusinessProcessIdLike;
     private String[] taskIdLike;
@@ -82,7 +85,7 @@ public class HistoryQueryImpl implements HistoryQuery {
         this.historyQueryMapper = historyQueryMapper;
         this.orderBy = new ArrayList<>();
         this.orderColumns = new ArrayList<>();
-        this.max_rows = -1;
+        this.maxRows = -1;
     }
 
     @Override
@@ -162,6 +165,7 @@ public class HistoryQueryImpl implements HistoryQuery {
         this.porTypeIn = toUpperCopy(porType);
         return this;
     }
+
     @Override
     public HistoryQuery porValueIn(String... porValue) {
         this.porValueIn = toUpperCopy(porValue);
@@ -491,8 +495,8 @@ public class HistoryQueryImpl implements HistoryQuery {
 
     @Override
     public HistoryQuery orderByCustomAttribute(int num, SortDirection sortDirection)
-            throws InvalidArgumentException {
-        
+        throws InvalidArgumentException {
+
         switch (num) {
             case 1:
                 return addOrderCriteria("CUSTOM_1", sortDirection);
@@ -518,7 +522,7 @@ public class HistoryQueryImpl implements HistoryQuery {
             return result;
         } catch (SQLException e) {
             LOGGER.error("Method openConnection() could not open a connection to the database.",
-                    e.getCause());
+                e.getCause());
             return result;
         } catch (NullPointerException npe) {
             LOGGER.error("No History Event found.");
@@ -534,37 +538,38 @@ public class HistoryQueryImpl implements HistoryQuery {
         List<HistoryEventImpl> result = new ArrayList<>();
         try {
             taskanaHistoryEngine.openConnection();
-            this.max_rows= offset + limit;
+            this.maxRows = offset + limit;
             result = historyQueryMapper.queryHistoryEvent(this);
             LOGGER.debug("transaction was successful. Result: {}", result.toString());
             limit = Math.min(result.size() - offset, limit);
-            if(result.size() > offset) {
+            if (result.size() > offset) {
                 return result.subList(offset, offset + limit);
             } else {
                 return new ArrayList<>();
             }
         } catch (SQLException e) {
             LOGGER.error("Method openConnection() could not open a connection to the database.",
-                    e.getCause());
+                e.getCause());
             return result;
         } catch (NullPointerException npe) {
             LOGGER.error("No History Event found.");
             return result;
         } finally {
             taskanaHistoryEngine.returnConnection();
-            this.max_rows = -1;
+            this.maxRows = -1;
         }
     }
 
     @Override
     public List<String> listValues(HistoryQueryColumnName dbColumnName, SortDirection sortDirection) {
-        LOGGER.debug("entry to listValues() of column {} with sortDirection {}, this {}", dbColumnName, sortDirection, this);
+        LOGGER.debug("entry to listValues() of column {} with sortDirection {}, this {}", dbColumnName, sortDirection,
+            this);
         List<String> result = new ArrayList<>();
         this.columnName = dbColumnName;
         List<String> cacheOrderBy = this.orderBy;
         this.orderBy.clear();
         this.addOrderCriteria(columnName.toString(), sortDirection);
-        
+
         try {
             taskanaHistoryEngine.openConnection();
             result = historyQueryMapper.queryHistoryColumnValues(this);
@@ -572,7 +577,7 @@ public class HistoryQueryImpl implements HistoryQuery {
             return result;
         } catch (SQLException e) {
             LOGGER.error("Method openConnection() could not open a connection to the database.",
-                    e.getCause());
+                e.getCause());
             return result;
         } catch (NullPointerException npe) {
             LOGGER.error("No History Event found.");
@@ -591,20 +596,20 @@ public class HistoryQueryImpl implements HistoryQuery {
         HistoryEventImpl result = new HistoryEventImpl();
         try {
             taskanaHistoryEngine.openConnection();
-            this.max_rows = 1;
+            this.maxRows = 1;
             result = historyQueryMapper.queryHistoryEvent(this).get(0);
             LOGGER.debug("transaction was successful. Result: {}", result.toString());
             return result;
         } catch (SQLException e) {
             LOGGER.error("Method openConnection() could not open a connection to the database.",
-                    e.getCause());
+                e.getCause());
             return result;
         } catch (NullPointerException npe) {
             LOGGER.error("No History Event found.");
             return result;
         } finally {
             taskanaHistoryEngine.returnConnection();
-            this.max_rows = -1;
+            this.maxRows = -1;
         }
     }
 
@@ -618,7 +623,7 @@ public class HistoryQueryImpl implements HistoryQuery {
             return result;
         } catch (SQLException e) {
             LOGGER.error("Method openConnection() could not open a connection to the database.",
-                    e.getCause());
+                e.getCause());
             return -1;
         } catch (NullPointerException npe) {
             LOGGER.error("No History Event found.");

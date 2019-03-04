@@ -75,7 +75,7 @@ public interface HistoryQueryMapper {
             + "<if test='newDataLike != null'>AND (<foreach item='item' collection='newDataLike' separator=' OR ' >UPPER(NEW_DATA) LIKE #{item}</foreach>)</if> "
             + "</where>"
             + "<if test='!orderBy.isEmpty()'>ORDER BY <foreach item='item' collection='orderBy' separator=',' >${item}</foreach></if> "
-            + "<if test='max_rows > 0'> FETCH FIRST #{max_rows} ROWS ONLY </if>"
+            + "<if test='maxRows > 0'> FETCH FIRST #{maxRows} ROWS ONLY </if>"
             + "</script>")
     @Results(value = {
             @Result(property = "id", column = "ID"),

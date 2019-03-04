@@ -1,7 +1,5 @@
 package pro.taskana.simplehistory.impl;
 
-import java.time.Instant;
-
 import pro.taskana.history.api.TaskanaHistoryEvent;
 
 /**

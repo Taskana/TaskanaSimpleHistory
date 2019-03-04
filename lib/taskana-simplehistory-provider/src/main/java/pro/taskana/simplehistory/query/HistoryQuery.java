@@ -663,7 +663,6 @@ public interface HistoryQuery extends BaseQuery<HistoryEventImpl, HistoryQueryCo
      * @return the query
      */
     HistoryQuery orderByOldValue(SortDirection sortDirection);
-    
 
     /**
      * Sort the query result by newValue.

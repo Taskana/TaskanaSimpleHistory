@@ -13,6 +13,9 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Set up the database's writer and generates data for tests.
+ */
 public class DBWriter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DBWriter.class);
@@ -27,9 +30,9 @@ public class DBWriter {
         this.errorWriter = new StringWriter();
         this.errorLogWriter = new PrintWriter(this.errorWriter);
     }
-    
+
     public void generateTestData(DataSource dataSource) throws SQLException {
-    	ScriptRunner runner = null;
+        ScriptRunner runner = null;
         try {
             runner = configScriptRunner(dataSource);
             runner.runScript(
@@ -47,7 +50,7 @@ public class DBWriter {
     }
 
     public void clearDB(DataSource dataSource) throws SQLException {
-    	ScriptRunner runner = null;
+        ScriptRunner runner = null;
         try {
             runner = configScriptRunner(dataSource);
             runner.runScript(new StringReader("DELETE FROM HISTORY_EVENTS;"));

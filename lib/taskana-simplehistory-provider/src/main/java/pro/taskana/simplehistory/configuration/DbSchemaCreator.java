@@ -15,6 +15,9 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Create the schema for the taskana history.
+ */
 public class DbSchemaCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DbSchemaCreator.class);

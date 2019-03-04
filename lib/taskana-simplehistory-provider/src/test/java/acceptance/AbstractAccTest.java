@@ -17,12 +17,12 @@ import org.slf4j.LoggerFactory;
 
 import configuration.DBWriter;
 import pro.taskana.configuration.TaskanaEngineConfiguration;
-import pro.taskana.history.api.TaskanaHistory;
-import pro.taskana.simplehistory.TaskanaHistoryEngine;
 import pro.taskana.simplehistory.impl.HistoryEventImpl;
 import pro.taskana.simplehistory.impl.SimpleHistoryServiceImpl;
-import pro.taskana.simplehistory.impl.TaskanaHistoryEngineImpl;
 
+/**
+ * Set up database for tests.
+ */
 public class AbstractAccTest {
 
     public static SimpleHistoryServiceImpl historyService;
@@ -31,6 +31,10 @@ public class AbstractAccTest {
     private static String schemaName = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAccTest.class);
     private static final int POOL_TIME_TO_WAIT = 50;
+
+    protected AbstractAccTest() {
+        // not called
+    }
 
     @BeforeClass
     public static void setupTest() throws Exception {
