@@ -14,10 +14,12 @@ import acceptance.AbstractAccTest;
 import pro.taskana.BaseQuery.SortDirection;
 import pro.taskana.TimeInterval;
 import pro.taskana.simplehistory.impl.HistoryEventImpl;
-import pro.taskana.simplehistory.impl.SimpleHistoryServiceImpl;
 import pro.taskana.simplehistory.query.HistoryQuery;
 import pro.taskana.simplehistory.query.HistoryQueryColumnName;
 
+/**
+ * Test for History queries.
+ */
 public class QueryHistoryAccTest extends AbstractAccTest {
 
     public QueryHistoryAccTest() {

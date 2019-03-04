@@ -28,13 +28,12 @@ import pro.taskana.simplehistory.impl.mappings.HistoryQueryMapper;
 public class HistoryQueryImplTest {
 
     private HistoryQueryImpl historyQueryImpl;
-    
+
     @Mock
     private TaskanaHistoryEngineImpl taskanaHistoryEngineMock;
-    
+
     @Mock
     private HistoryQueryMapper historyQueryMock;
-    
 
     @Before
     public void setup() {
@@ -52,25 +51,26 @@ public class HistoryQueryImplTest {
         doReturn(returnList).when(historyQueryMock).queryHistoryEvent(historyQueryImpl);
 
         List<HistoryEventImpl> result = historyQueryImpl
-                .taskIdIn("TKI:01")
-                .workbasketKeyIn("T22","some_long_long, long loooooooooooooooooooooooooooooooooooong String.")
-                .userIdIn("BV")
-                .commentLike("%as important")
-                .createdWithin(interval)
-                .list();
+            .taskIdIn("TKI:01")
+            .workbasketKeyIn("T22", "some_long_long, long loooooooooooooooooooooooooooooooooooong String.")
+            .userIdIn("BV")
+            .commentLike("%as important")
+            .createdWithin(interval)
+            .list();
 
         validateMockitoUsage();
         assertArrayEquals(returnList.toArray(), result.toArray());
     }
-    
-    private HistoryEventImpl createHistoryEvent(String taskId, String workbasketKey, String type, String userId, String comment, Instant created) {
-    	HistoryEventImpl he = new HistoryEventImpl();
-    	he.setTaskId(taskId);
-    	he.setWorkbasketKey(workbasketKey);
-    	he.setEventType(type);
-    	he.setUserId(userId);
-    	he.setComment(comment);
-    	he.setCreated(created);
-    	return he;
+
+    private HistoryEventImpl createHistoryEvent(String taskId, String workbasketKey, String type, String userId,
+        String comment, Instant created) {
+        HistoryEventImpl he = new HistoryEventImpl();
+        he.setTaskId(taskId);
+        he.setWorkbasketKey(workbasketKey);
+        he.setEventType(type);
+        he.setUserId(userId);
+        he.setComment(comment);
+        he.setCreated(created);
+        return he;
     }
 }

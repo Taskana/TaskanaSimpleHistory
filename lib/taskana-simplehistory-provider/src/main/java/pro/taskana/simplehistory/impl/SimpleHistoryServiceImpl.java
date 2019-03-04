@@ -58,6 +58,6 @@ public class SimpleHistoryServiceImpl implements TaskanaHistory {
     }
 
     public HistoryQuery createHistoryQuery() {
-    	return new HistoryQueryImpl(taskanaHistoryEngine, historyQueryMapper);
+        return new HistoryQueryImpl(taskanaHistoryEngine, historyQueryMapper);
     }
 }

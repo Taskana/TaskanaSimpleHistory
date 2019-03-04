@@ -36,7 +36,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
     protected static ThreadLocal<Deque<SqlSessionManager>> sessionStack = new ThreadLocal<>();
     protected TaskanaHistory taskanaHistoryService;
 
-    private TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
+    protected TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
         this.taskanaEngineConfiguration = taskanaEngineConfiguration;
 
         createTransactionFactory(this.taskanaEngineConfiguration.getUseManagedTransactions());
@@ -63,7 +63,6 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
 
     /**
      * Open the connection to the database. to be called at the begin of each Api call that accesses the database
-     *
      */
     void openConnection() throws SQLException {
         initSqlSession();
