@@ -1,7 +1,8 @@
 package pro.taskana.rest.simplehistory;
 
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -267,9 +268,7 @@ public class TaskHistoryEventController extends AbstractPagingController {
         }
         if (params.containsKey(CREATED)) {
             String[] created = extractCommaSeparatedFields(params.get(CREATED));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            Instant date = Instant.from(formatter.parse(created[0]));
-            TimeInterval timeInterval = new TimeInterval(date, date);
+            TimeInterval timeInterval = getTimeIntervalOf(created);
             query.createdWithin(timeInterval);
             params.remove(CREATED);
         }
@@ -408,5 +407,24 @@ public class TaskHistoryEventController extends AbstractPagingController {
         }
 
         return query;
+    }
+
+    private TimeInterval getTimeIntervalOf(String[] created) {
+        LocalDate begin;
+        LocalDate end;
+        try {
+            begin = LocalDate.parse(created[0]);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot parse String '" + created[0] + "'. Expected a String of the Format 'yyyy-MM-dd'.");
+        }
+        if (created.length < 2) {
+            end = begin.plusDays(1);
+        } else {
+            end = LocalDate.parse(created[1]);
+        }
+        Instant beginInst = begin.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Instant endInst = end.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        TimeInterval timeInterval = new TimeInterval(beginInst, endInst);
+        return timeInterval;
     }
 }

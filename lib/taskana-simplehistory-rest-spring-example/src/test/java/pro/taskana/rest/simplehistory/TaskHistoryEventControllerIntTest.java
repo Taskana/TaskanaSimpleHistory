@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 import javax.sql.DataSource;
@@ -128,6 +129,31 @@ public class TaskHistoryEventControllerIntTest {
             assertEquals(HttpStatus.BAD_REQUEST, e.getStatusCode());
             assertTrue(e.getResponseBodyAsString().contains("[invalid]"));
         }
+    }
+
+    @Test
+    public void testGetHistoryEventOfDate() {
+        String currentTime = LocalDateTime.now().toString();
+
+        try {
+            template.exchange(
+                server + port + "/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
+                new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
+                });
+            fail();
+        } catch (HttpClientErrorException e) {
+            assertEquals(HttpStatus.BAD_REQUEST, e.getStatusCode());
+            assertTrue(e.getResponseBodyAsString().contains(currentTime));
+        }
+
+        //correct Format 'yyyy-MM-dd'
+        currentTime = currentTime.substring(0, 10);
+        ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
+            server + port + "/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
+            new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
+            });
+        assertNotNull(response.getBody().getLink(Link.REL_SELF));
+        assertEquals(25, response.getBody().getContent().size());
     }
 
     @Test
