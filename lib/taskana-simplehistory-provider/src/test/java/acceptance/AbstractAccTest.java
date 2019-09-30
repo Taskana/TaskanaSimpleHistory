@@ -26,10 +26,15 @@ import pro.taskana.simplehistory.impl.SimpleHistoryServiceImpl;
 public class AbstractAccTest {
 
     public static SimpleHistoryServiceImpl historyService;
+
     protected static TaskanaEngineConfiguration taskanaEngineConfiguration;
+
     private static DataSource dataSource = null;
+
     private static String schemaName = null;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAccTest.class);
+
     private static final int POOL_TIME_TO_WAIT = 50;
 
     protected AbstractAccTest() {
@@ -80,7 +85,7 @@ public class AbstractAccTest {
     /**
      * create Default DataSource for in-memory database.
      *
-     * @return
+     * @return the TASKANA default datasource.
      */
     private static DataSource createDefaultDataSource() {
 
@@ -98,11 +103,10 @@ public class AbstractAccTest {
 
     /**
      * returns the SchemaName used for Junit test. If the file {user.home}/taskanaUnitTest.properties is present, the
-     * SchemaName is created according to the property schemaName.
-     * a sample properties file for DB2 looks as follows:
+     * SchemaName is created according to the property schemaName. a sample properties file for DB2 looks as follows:
      * jdbcDriver=com.ibm.db2.jcc.DB2Driver jdbcUrl=jdbc:db2://localhost:50000/tskdb dbUserName=db2user
-     * dbPassword=db2password schemaName=TASKANA If any of these properties is missing, or the file doesn't exist, the default schemaName
-     * TASKANA is created used.
+     * dbPassword=db2password schemaName=TASKANA If any of these properties is missing, or the file doesn't exist, the
+     * default schemaName TASKANA is created used.
      *
      * @return String for unit test
      */
@@ -124,11 +128,15 @@ public class AbstractAccTest {
      * create historyEvent object.
      *
      * @param workbasketKey
+     *            the workbasketKey, the task currently resides in.
      * @param taskId
+     *            the taskid the event belongs to.
      * @param type
+     *            the type of the event.
      * @param comment
+     *            the individual comment.
      * @param previousWorkbasketId
-     *
+     *            the workbasketId of the previous workbasket (if applicable).
      * @return History event object created.
      */
     public static HistoryEventImpl createHistoryEvent(String workbasketKey, String taskId, String type, String comment,
@@ -146,7 +154,8 @@ public class AbstractAccTest {
      * create data source from properties file.
      *
      * @param propertiesFileName
-     * @return
+     *            the name of the properties file.
+     * @return the datasource constructed from the information in the properties file.
      */
     private static DataSource createDataSourceFromProperties(String propertiesFileName) {
         DataSource ds = null;
