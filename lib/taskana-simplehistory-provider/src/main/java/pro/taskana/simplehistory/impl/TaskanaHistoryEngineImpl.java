@@ -29,11 +29,17 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
     private static final String DEFAULT = "default";
 
     TaskanaEngineConfiguration taskanaEngineConfiguration;
+
     protected SqlSessionManager sessionManager;
+
     protected TransactionFactory transactionFactory;
+
     protected java.sql.Connection connection = null;
+
     protected DbSchemaCreator dbSchemaCreator;
+
     protected static ThreadLocal<Deque<SqlSessionManager>> sessionStack = new ThreadLocal<>();
+
     protected TaskanaHistory taskanaHistoryService;
 
     protected TaskanaHistoryEngineImpl(TaskanaEngineConfiguration taskanaEngineConfiguration) throws SQLException {
@@ -63,6 +69,9 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
 
     /**
      * Open the connection to the database. to be called at the begin of each Api call that accesses the database
+     *
+     * @throws SQLException
+     *             thrown if the connection could not be opened.
      */
     void openConnection() throws SQLException {
         initSqlSession();
@@ -106,6 +115,7 @@ public class TaskanaHistoryEngineImpl implements TaskanaHistoryEngine {
      * creates the MyBatis transaction factory.
      *
      * @param useManagedTransactions
+     *            true if TASKANA should use a ManagedTransactionFactory.
      */
     private void createTransactionFactory(boolean useManagedTransactions) {
         if (useManagedTransactions) {
