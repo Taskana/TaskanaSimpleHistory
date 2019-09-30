@@ -49,16 +49,21 @@ import pro.taskana.rest.simplehistory.sampledata.SampleDataGenerator;
  */
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TaskHistoryRestConfiguration.class},
+@SpringBootTest(classes = { TaskHistoryRestConfiguration.class },
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskHistoryEventControllerIntTest {
+
     @Value("${taskana.schemaName:TASKANA}")
     public String schemaName;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskHistoryEventControllerIntTest.class);
+
     String server = "http://127.0.0.1:";
+
     RestTemplate template;
+
     HttpEntity<String> request;
+
     @LocalServerPort
     int port;
 
@@ -80,7 +85,7 @@ public class TaskHistoryEventControllerIntTest {
     @Test
     public void testGetAllHistoryEvent() {
         ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
-            server + port + "/v1/task-history-event", HttpMethod.GET, request,
+            server + port + "/api/v1/task-history-event", HttpMethod.GET, request,
             new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
             });
         assertNotNull(response.getBody().getLink(Link.REL_SELF));
@@ -89,7 +94,7 @@ public class TaskHistoryEventControllerIntTest {
 
     @Test
     public void testGetAllHistoryEventDescendingOrder() {
-        String parameters = "/v1/task-history-event?sort-by=business-process-id&order=desc&page-size=3&page=1";
+        String parameters = "/api/v1/task-history-event?sort-by=business-process-id&order=desc&page-size=3&page=1";
         ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
             server + port + parameters, HttpMethod.GET, request,
             new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
@@ -106,7 +111,7 @@ public class TaskHistoryEventControllerIntTest {
     public void testGetSpecificTaskHistoryEvent() {
         ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
             server + port
-                + "/v1/task-history-event?business-process-id=BPI:01&sort-by=business-process-id&order=asc&page-size=6&page=1",
+                + "/api/v1/task-history-event?business-process-id=BPI:01&sort-by=business-process-id&order=asc&page-size=6&page=1",
             HttpMethod.GET, request,
             new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
 
@@ -121,7 +126,7 @@ public class TaskHistoryEventControllerIntTest {
     public void testThrowsExceptionIfInvalidFilterIsUsed() {
         try {
             template.exchange(
-                server + port + "/v1/task-history-event?invalid=BPI:01", HttpMethod.GET, request,
+                server + port + "/api/v1/task-history-event?invalid=BPI:01", HttpMethod.GET, request,
                 new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
                 });
             fail();
@@ -137,7 +142,7 @@ public class TaskHistoryEventControllerIntTest {
 
         try {
             template.exchange(
-                server + port + "/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
+                server + port + "/api/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
                 new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
                 });
             fail();
@@ -146,10 +151,10 @@ public class TaskHistoryEventControllerIntTest {
             assertTrue(e.getResponseBodyAsString().contains(currentTime));
         }
 
-        //correct Format 'yyyy-MM-dd'
+        // correct Format 'yyyy-MM-dd'
         currentTime = currentTime.substring(0, 10);
         ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
-            server + port + "/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
+            server + port + "/api/v1/task-history-event?created=" + currentTime, HttpMethod.GET, request,
             new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
             });
         assertNotNull(response.getBody().getLink(Link.REL_SELF));
@@ -158,7 +163,7 @@ public class TaskHistoryEventControllerIntTest {
 
     @Test
     public void testGetSecondPageSortedByKey() {
-        String parameters = "/v1/task-history-event?sort-by=workbasket-key&order=desc&page=2&page-size=2";
+        String parameters = "/api/v1/task-history-event?sort-by=workbasket-key&order=desc&page=2&page-size=2";
         ResponseEntity<PagedResources<TaskHistoryEventResource>> response = template.exchange(
             server + port + parameters, HttpMethod.GET, request,
             new ParameterizedTypeReference<PagedResources<TaskHistoryEventResource>>() {
@@ -176,7 +181,7 @@ public class TaskHistoryEventControllerIntTest {
         assertTrue(response.getBody()
             .getLink("allTaskHistoryEvent")
             .getHref()
-            .endsWith("/v1/task-history-event"));
+            .endsWith("/api/v1/task-history-event"));
         assertNotNull(response.getBody().getLink(Link.REL_FIRST));
         assertNotNull(response.getBody().getLink(Link.REL_LAST));
     }
@@ -195,7 +200,7 @@ public class TaskHistoryEventControllerIntTest {
         converter.setSupportedMediaTypes(MediaType.parseMediaTypes("application/hal+json"));
         converter.setObjectMapper(mapper);
 
-        RestTemplate template = new RestTemplate(Collections.<HttpMessageConverter<?>>singletonList(converter));
+        RestTemplate template = new RestTemplate(Collections.<HttpMessageConverter<?>> singletonList(converter));
         return template;
     }
 }
