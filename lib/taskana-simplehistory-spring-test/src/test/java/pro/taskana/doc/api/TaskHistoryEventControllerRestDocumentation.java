@@ -34,7 +34,8 @@ import pro.taskana.rest.simplehistory.TaskHistoryRestConfiguration;
  * Generate documentation for the history event controller.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TaskHistoryRestConfiguration.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = TaskHistoryRestConfiguration.class,
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskHistoryEventControllerRestDocumentation {
 
     @LocalServerPort
@@ -51,6 +52,7 @@ public class TaskHistoryEventControllerRestDocumentation {
     private HashMap<String, String> taskHistoryEventFieldDescriptionsMap = new HashMap<String, String>();
 
     private FieldDescriptor[] allTaskHistoryEventFieldDescriptors;
+
     private FieldDescriptor[] taskHistoryEventFieldDescriptors;
 
     @Before
@@ -174,7 +176,7 @@ public class TaskHistoryEventControllerRestDocumentation {
     public void getAllTaskHistoryEventDocTest() throws Exception {
         this.mockMvc.perform(
             RestDocumentationRequestBuilders.get(
-                "http://127.0.0.1:" + port + "/v1/task-history-event?page=1&page-size=3")
+                "http://127.0.0.1:" + port + "/api/v1/task-history-event?page=1&page-size=3")
                 .accept("application/hal+json")
                 .header("Authorization", "Basic dGVhbWxlYWRfMTp0ZWFtbGVhZF8x"))
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -185,7 +187,7 @@ public class TaskHistoryEventControllerRestDocumentation {
     @Test
     public void getSpecificTaskHistoryEventDocTest() throws Exception {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get(
-            "http://127.0.0.1:" + port + "/v1/task-history-event?business-process-id=BPI:02")
+            "http://127.0.0.1:" + port + "/api/v1/task-history-event?business-process-id=BPI:02")
             .accept("application/hal+json")
             .header("Authorization", "Basic dGVhbWxlYWRfMTp0ZWFtbGVhZF8x"))
             .andExpect(MockMvcResultMatchers.status().isOk())

@@ -36,61 +36,103 @@ import pro.taskana.simplehistory.query.HistoryQuery;
  */
 @RestController
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
-@RequestMapping(path = "/v1/task-history-event", produces = "application/hal+json")
+@RequestMapping(path = "/api/v1/task-history-event", produces = "application/hal+json")
 public class TaskHistoryEventController extends AbstractPagingController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskHistoryEventController.class);
 
     private static final String LIKE = "%";
+
     private static final String BUSINESS_PROCESS_ID = "business-process-id";
+
     private static final String BUSINESS_PROCESS_ID_LIKE = "business-process-id-like";
+
     private static final String PARENT_BUSINESS_PROCESS_ID = "parent-business-process-id";
+
     private static final String PARENT_BUSINESS_PROCESS_ID_LIKE = "parent-business-process-id-like";
+
     private static final String TASK_ID = "task-id";
+
     private static final String TASK_ID_LIKE = "task-id-like";
+
     private static final String EVENT_TYPE = "event-type";
+
     private static final String EVENT_TYPE_LIKE = "event-type-like";
+
     private static final String CREATED = "created";
+
     private static final String USER_ID = "user-id";
+
     private static final String USER_ID_LIKE = "user-id-like";
+
     private static final String DOMAIN = "domain";
+
     private static final String WORKBASKET_KEY = "workbasket-key";
+
     private static final String WORKBASKET_KEY_LIKE = "workbasket-key-like";
+
     private static final String POR_COMPANY = "por-company";
+
     private static final String POR_COMPANY_LIKE = "por-company-like";
+
     private static final String POR_SYSTEM = "por-system";
+
     private static final String POR_SYSTEM_LIKE = "por-system-like";
+
     private static final String POR_INSTANCE = "por-instance";
+
     private static final String POR_INSTANCE_LIKE = "por-instance-like";
+
     private static final String POR_TYPE = "por-type";
+
     private static final String POR_TYPE_LIKE = "por-type-like";
+
     private static final String POR_VALUE = "por-value";
+
     private static final String POR_VALUE_LIKE = "por-value-like";
+
     private static final String TASK_CLASSIFICATION_KEY = "task-classification-key";
+
     private static final String TASK_CLASSIFICATION_KEY_LIKE = "task-classification-key-like";
+
     private static final String TASK_CLASSIFICATION_CATEGORY = "task-classification-category";
+
     private static final String TASK_CLASSIFICATION_CATEGORY_LIKE = "task-classification-category-like";
+
     private static final String ATTACHMENT_CLASSIFICATION_KEY = "attachment-classification-key";
+
     private static final String ATTACHMENT_CLASSIFICATION_KEY_LIKE = "attachment-classification-key-like";
+
     private static final String CUSTOM_1 = "custom-1";
+
     private static final String CUSTOM_1_LIKE = "custom-1-like";
+
     private static final String CUSTOM_2 = "custom-2";
+
     private static final String CUSTOM_2_LIKE = "custom-2-like";
+
     private static final String CUSTOM_3 = "custom-3";
+
     private static final String CUSTOM_3_LIKE = "custom-3-like";
+
     private static final String CUSTOM_4 = "custom-4";
+
     private static final String CUSTOM_4_LIKE = "custom-4-like";
 
     private static final String SORT_BY = "sort-by";
+
     private static final String SORT_DIRECTION = "order";
 
     private static final String PAGING_PAGE = "page";
+
     private static final String PAGING_PAGE_SIZE = "page-size";
 
     private SimpleHistoryServiceImpl simpleHistoryService;
 
     private TaskanaEngineConfiguration taskanaEngineConfiguration;
 
-    public TaskHistoryEventController(TaskanaEngineConfiguration taskanaEngineConfiguration, SimpleHistoryServiceImpl simpleHistoryServiceImpl) {
+    public TaskHistoryEventController(TaskanaEngineConfiguration taskanaEngineConfiguration,
+        SimpleHistoryServiceImpl simpleHistoryServiceImpl) {
         this.taskanaEngineConfiguration = taskanaEngineConfiguration;
         this.simpleHistoryService = simpleHistoryServiceImpl;
         simpleHistoryService.initialize(taskanaEngineConfiguration);
@@ -130,7 +172,8 @@ public class TaskHistoryEventController extends AbstractPagingController {
         PagedResources<TaskHistoryEventResource> pagedResources = assembler.toResources(historyEvents, pageMetadata);
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Exit from getTaskHistoryEvent(), returning {}", new ResponseEntity<>(pagedResources, HttpStatus.OK));
+            LOGGER.debug("Exit from getTaskHistoryEvent(), returning {}",
+                new ResponseEntity<>(pagedResources, HttpStatus.OK));
         }
 
         return new ResponseEntity<>(pagedResources, HttpStatus.OK);
@@ -358,7 +401,8 @@ public class TaskHistoryEventController extends AbstractPagingController {
             params.remove(TASK_CLASSIFICATION_CATEGORY_LIKE);
         }
         if (params.containsKey(ATTACHMENT_CLASSIFICATION_KEY)) {
-            String[] attachmentClassificationKey = extractCommaSeparatedFields(params.get(ATTACHMENT_CLASSIFICATION_KEY));
+            String[] attachmentClassificationKey = extractCommaSeparatedFields(
+                params.get(ATTACHMENT_CLASSIFICATION_KEY));
             query.attachmentClassificationKeyIn(attachmentClassificationKey);
             params.remove(ATTACHMENT_CLASSIFICATION_KEY);
         }
@@ -415,7 +459,8 @@ public class TaskHistoryEventController extends AbstractPagingController {
         try {
             begin = LocalDate.parse(created[0]);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Cannot parse String '" + created[0] + "'. Expected a String of the Format 'yyyy-MM-dd'.");
+            throw new IllegalArgumentException(
+                "Cannot parse String '" + created[0] + "'. Expected a String of the Format 'yyyy-MM-dd'.");
         }
         if (created.length < 2) {
             end = begin.plusDays(1);
