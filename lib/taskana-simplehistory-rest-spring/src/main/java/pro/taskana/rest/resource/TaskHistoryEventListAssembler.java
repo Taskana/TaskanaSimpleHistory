@@ -5,8 +5,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import java.util.List;
 
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.PagedResources;
 
+import pro.taskana.rest.resource.PagedResources.PageMetadata;
 import pro.taskana.rest.simplehistory.TaskHistoryEventController;
 import pro.taskana.simplehistory.impl.HistoryEventImpl;
 
@@ -18,12 +18,12 @@ public class TaskHistoryEventListAssembler extends AbstractRessourcesAssembler {
     public TaskHistoryEventListAssembler() {
     }
 
-    public PagedResources<TaskHistoryEventResource> toResources(List<HistoryEventImpl> historyEvents,
-        PagedResources.PageMetadata pageMetadata) {
+    public TaskHistoryEventListResource toResources(List<HistoryEventImpl> historyEvents,
+        PageMetadata pageMetadata) {
 
         TaskHistoryEventAssembler assembler = new TaskHistoryEventAssembler();
         List<TaskHistoryEventResource> resources = assembler.toResources(historyEvents);
-        PagedResources<TaskHistoryEventResource> pagedResources = new PagedResources<TaskHistoryEventResource>(
+        TaskHistoryEventListResource pagedResources = new TaskHistoryEventListResource(
             resources,
             pageMetadata);
 

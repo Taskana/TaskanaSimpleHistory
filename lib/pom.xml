@@ -1,13 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pro.taskana.simplehistory</groupId>
 	<artifactId>taskana-simplehistory-parent</artifactId>
+	<version>1.1.4-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>The taskana history events plugin parent and bom module.</description>
 	<url>http://taskana.pro</url>
-	<packaging>pom</packaging>
-	<version>1.1.4-SNAPSHOT</version>
 
 	<modules>
 		<module>taskana-simplehistory-provider</module>
@@ -27,17 +27,10 @@
 
 		<spring.version>5.0.5.RELEASE</spring.version>
 		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
-        
-        <version.h2>1.4.197</version.h2>
-        <version.junit>4.12</version.junit>
-	</properties>
 
-	<licenses>
-		<license>
-			<name>The Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
+		<version.h2>1.4.197</version.h2>
+		<version.junit>4.12</version.junit>
+	</properties>
 
 	<developers>
 		<developer>
@@ -49,10 +42,17 @@
 	</developers>
 
 	<scm>
+		<url>http://github.com/taskana/TaskanaSimpleHistory/tree/master</url>
 		<connection>scm:git:git://github.com/taskana/TaskanaSimpleHistory.git</connection>
 		<developerConnection>scm:git:ssh://github.com:taskana/TaskanaSimpleHistory.git</developerConnection>
-		<url>http://github.com/taskana/TaskanaSimpleHistory/tree/master</url>
 	</scm>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 
 	<profiles>
 		<profile>
@@ -152,7 +152,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -225,4 +225,17 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!--	necessary so that the taskana-snapshots are fetched from sonatype-->
+	<repositories>
+		<repository>
+			<id>snapshots-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>

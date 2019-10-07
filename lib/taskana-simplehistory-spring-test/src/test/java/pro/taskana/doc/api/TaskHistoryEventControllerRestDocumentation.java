@@ -68,41 +68,41 @@ public class TaskHistoryEventControllerRestDocumentation {
                 .withRequestDefaults(prettyPrint()))
             .build();
 
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.taskHistoryId", "Unique ID");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.businessProcessId", "The id of the business process");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.parentBusinessProcessId",
+        taskHistoryEventFieldDescriptionsMap.put("taskHistoryId", "Unique ID");
+        taskHistoryEventFieldDescriptionsMap.put("businessProcessId", "The id of the business process");
+        taskHistoryEventFieldDescriptionsMap.put("parentBusinessProcessId",
             "The id of the parent business process");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.taskId", "The id of the task");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.eventType", "The type of the event");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.created", "The time was created");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.userId", "The id of the user");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.domain", "Domain");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.workbasketKey", "The key of workbasket");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.porCompany", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.porSystem", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.porInstance", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.porValue", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.porType", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.taskClassificationKey", "The key of classification task");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.taskClassificationCategory",
+        taskHistoryEventFieldDescriptionsMap.put("taskId", "The id of the task");
+        taskHistoryEventFieldDescriptionsMap.put("eventType", "The type of the event");
+        taskHistoryEventFieldDescriptionsMap.put("created", "The time was created");
+        taskHistoryEventFieldDescriptionsMap.put("userId", "The id of the user");
+        taskHistoryEventFieldDescriptionsMap.put("domain", "Domain");
+        taskHistoryEventFieldDescriptionsMap.put("workbasketKey", "The key of workbasket");
+        taskHistoryEventFieldDescriptionsMap.put("porCompany", "");
+        taskHistoryEventFieldDescriptionsMap.put("porSystem", "");
+        taskHistoryEventFieldDescriptionsMap.put("porInstance", "");
+        taskHistoryEventFieldDescriptionsMap.put("porValue", "");
+        taskHistoryEventFieldDescriptionsMap.put("porType", "");
+        taskHistoryEventFieldDescriptionsMap.put("taskClassificationKey", "The key of classification task");
+        taskHistoryEventFieldDescriptionsMap.put("taskClassificationCategory",
             "The category of classification");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.attachmentClassificationKey", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.comment", "");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.oldValue", "The old value");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.newValue", "The new value");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.custom1", "A custom property with name \"1\"");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.custom2", "A custom property with name \"2\"");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.custom3", "A custom property with name \"3\"");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.custom4", "A custom property with name \"4\"");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.oldData", "The old data");
-        taskHistoryEventFieldDescriptionsMap.put("_embedded.newData", "The new data");
+        taskHistoryEventFieldDescriptionsMap.put("attachmentClassificationKey", "");
+        taskHistoryEventFieldDescriptionsMap.put("comment", "");
+        taskHistoryEventFieldDescriptionsMap.put("oldValue", "The old value");
+        taskHistoryEventFieldDescriptionsMap.put("newValue", "The new value");
+        taskHistoryEventFieldDescriptionsMap.put("custom1", "A custom property with name \"1\"");
+        taskHistoryEventFieldDescriptionsMap.put("custom2", "A custom property with name \"2\"");
+        taskHistoryEventFieldDescriptionsMap.put("custom3", "A custom property with name \"3\"");
+        taskHistoryEventFieldDescriptionsMap.put("custom4", "A custom property with name \"4\"");
+        taskHistoryEventFieldDescriptionsMap.put("oldData", "The old data");
+        taskHistoryEventFieldDescriptionsMap.put("newData", "The new data");
         taskHistoryEventFieldDescriptionsMap.put("_links.self.href", "The links of this task history event");
         taskHistoryEventFieldDescriptionsMap.put("_links.allTaskHistoryEvent.href", "Link to all task history event");
         taskHistoryEventFieldDescriptionsMap.put("_links.first.href", "Link to the first result");
         taskHistoryEventFieldDescriptionsMap.put("_links.last.href", "Link to the last result");
 
         allTaskHistoryEventFieldDescriptors = new FieldDescriptor[] {
-            subsectionWithPath("_embedded.taskHistoryEventResourceList").description("An array of Task history event"),
+            subsectionWithPath("taskHistoryEvents").description("An array of Task history event"),
             fieldWithPath("_links.allTaskHistoryEvent.href").ignored(),
             fieldWithPath("_links.self.href").ignored(),
             fieldWithPath("_links.first.href").ignored(),
@@ -115,58 +115,58 @@ public class TaskHistoryEventControllerRestDocumentation {
         };
 
         taskHistoryEventFieldDescriptors = new FieldDescriptor[] {
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].taskHistoryId").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.taskHistoryId")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].businessProcessId").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.businessProcessId")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].parentBusinessProcessId").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.parentBusinessProcessId")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].taskId").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.taskId")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].eventType").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.eventType")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].created").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.created")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].userId").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.userId")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].domain").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.domain")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].workbasketKey").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.workbasketKey")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].porCompany").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.porCompany")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].porSystem").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.porSystem")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].porInstance").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.porInstance")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].porValue").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.porValue")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].porType").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.porType")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].taskClassificationKey").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.taskClassificationKey")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].taskClassificationCategory").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.taskClassificationCategory")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].attachmentClassificationKey").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.attachmentClassificationKey")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].comment").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.comment")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].oldValue").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.oldValue")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].newValue").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.newValue")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].custom1").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.custom1")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].custom2").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.custom2")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].custom3").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.custom3")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].custom4").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.custom4")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].oldData").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.oldData")),
-            fieldWithPath("_embedded.taskHistoryEventResourceList[].newData").description(
-                taskHistoryEventFieldDescriptionsMap.get("_embedded.newData")),
+            fieldWithPath("taskHistoryEvents[].taskHistoryId").description(
+                taskHistoryEventFieldDescriptionsMap.get("taskHistoryId")),
+            fieldWithPath("taskHistoryEvents[].businessProcessId").description(
+                taskHistoryEventFieldDescriptionsMap.get("businessProcessId")),
+            fieldWithPath("taskHistoryEvents[].parentBusinessProcessId").description(
+                taskHistoryEventFieldDescriptionsMap.get("parentBusinessProcessId")),
+            fieldWithPath("taskHistoryEvents[].taskId").description(
+                taskHistoryEventFieldDescriptionsMap.get("taskId")),
+            fieldWithPath("taskHistoryEvents[].eventType").description(
+                taskHistoryEventFieldDescriptionsMap.get("eventType")),
+            fieldWithPath("taskHistoryEvents[].created").description(
+                taskHistoryEventFieldDescriptionsMap.get("created")),
+            fieldWithPath("taskHistoryEvents[].userId").description(
+                taskHistoryEventFieldDescriptionsMap.get("userId")),
+            fieldWithPath("taskHistoryEvents[].domain").description(
+                taskHistoryEventFieldDescriptionsMap.get("domain")),
+            fieldWithPath("taskHistoryEvents[].workbasketKey").description(
+                taskHistoryEventFieldDescriptionsMap.get("workbasketKey")),
+            fieldWithPath("taskHistoryEvents[].porCompany").description(
+                taskHistoryEventFieldDescriptionsMap.get("porCompany")),
+            fieldWithPath("taskHistoryEvents[].porSystem").description(
+                taskHistoryEventFieldDescriptionsMap.get("porSystem")),
+            fieldWithPath("taskHistoryEvents[].porInstance").description(
+                taskHistoryEventFieldDescriptionsMap.get("porInstance")),
+            fieldWithPath("taskHistoryEvents[].porValue").description(
+                taskHistoryEventFieldDescriptionsMap.get("porValue")),
+            fieldWithPath("taskHistoryEvents[].porType").description(
+                taskHistoryEventFieldDescriptionsMap.get("porType")),
+            fieldWithPath("taskHistoryEvents[].taskClassificationKey").description(
+                taskHistoryEventFieldDescriptionsMap.get("taskClassificationKey")),
+            fieldWithPath("taskHistoryEvents[].taskClassificationCategory").description(
+                taskHistoryEventFieldDescriptionsMap.get("taskClassificationCategory")),
+            fieldWithPath("taskHistoryEvents[].attachmentClassificationKey").description(
+                taskHistoryEventFieldDescriptionsMap.get("attachmentClassificationKey")),
+            fieldWithPath("taskHistoryEvents[].comment").description(
+                taskHistoryEventFieldDescriptionsMap.get("comment")),
+            fieldWithPath("taskHistoryEvents[].oldValue").description(
+                taskHistoryEventFieldDescriptionsMap.get("oldValue")),
+            fieldWithPath("taskHistoryEvents[].newValue").description(
+                taskHistoryEventFieldDescriptionsMap.get("newValue")),
+            fieldWithPath("taskHistoryEvents[].custom1").description(
+                taskHistoryEventFieldDescriptionsMap.get("custom1")),
+            fieldWithPath("taskHistoryEvents[].custom2").description(
+                taskHistoryEventFieldDescriptionsMap.get("custom2")),
+            fieldWithPath("taskHistoryEvents[].custom3").description(
+                taskHistoryEventFieldDescriptionsMap.get("custom3")),
+            fieldWithPath("taskHistoryEvents[].custom4").description(
+                taskHistoryEventFieldDescriptionsMap.get("custom4")),
+            fieldWithPath("taskHistoryEvents[].oldData").description(
+                taskHistoryEventFieldDescriptionsMap.get("oldData")),
+            fieldWithPath("taskHistoryEvents[].newData").description(
+                taskHistoryEventFieldDescriptionsMap.get("newData")),
             fieldWithPath("_links.self.href").ignored(),
             fieldWithPath("page").ignored()
         };

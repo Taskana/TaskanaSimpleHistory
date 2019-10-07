@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.PagedResources.PageMetadata;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +23,9 @@ import pro.taskana.configuration.TaskanaEngineConfiguration;
 import pro.taskana.exceptions.InvalidArgumentException;
 import pro.taskana.impl.util.LoggerUtils;
 import pro.taskana.rest.AbstractPagingController;
+import pro.taskana.rest.resource.PagedResources.PageMetadata;
 import pro.taskana.rest.resource.TaskHistoryEventListAssembler;
-import pro.taskana.rest.resource.TaskHistoryEventResource;
+import pro.taskana.rest.resource.TaskHistoryEventListResource;
 import pro.taskana.simplehistory.impl.HistoryEventImpl;
 import pro.taskana.simplehistory.impl.SimpleHistoryServiceImpl;
 import pro.taskana.simplehistory.query.HistoryQuery;
@@ -140,7 +139,7 @@ public class TaskHistoryEventController extends AbstractPagingController {
 
     @GetMapping
     @Transactional(readOnly = true, rollbackFor = Exception.class)
-    public ResponseEntity<PagedResources<TaskHistoryEventResource>> getTaskHistoryEvent(
+    public ResponseEntity<TaskHistoryEventListResource> getTaskHistoryEvent(
         @RequestParam MultiValueMap<String, String> params) throws InvalidArgumentException {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Entry to getTaskHistoryEvent(params= {})", LoggerUtils.mapToString(params));
@@ -169,7 +168,7 @@ public class TaskHistoryEventController extends AbstractPagingController {
         }
 
         TaskHistoryEventListAssembler assembler = new TaskHistoryEventListAssembler();
-        PagedResources<TaskHistoryEventResource> pagedResources = assembler.toResources(historyEvents, pageMetadata);
+        TaskHistoryEventListResource pagedResources = assembler.toResources(historyEvents, pageMetadata);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Exit from getTaskHistoryEvent(), returning {}",
